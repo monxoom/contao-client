@@ -1,0 +1,3 @@
+superlogin_auth:
+    path:      /contao/superlogin/auth/{serverId}
+    defaults:  { _controller: ComoloSuperLoginClientBundle:Authorization:authorization }

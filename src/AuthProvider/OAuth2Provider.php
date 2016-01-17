@@ -30,41 +30,6 @@ use League\OAuth2\Client\Provider\GenericProvider as OAuth2GenericProvider;
 class OAuth2Provider extends AuthProvider
 {
     /**
-     * initialize CLC Client
-     * @return ClcClient
-     */
-    protected function getClcClient()
-    {
-        // Get public key from certificate
-        $resPubKey = openssl_pkey_get_public($this->getServerKey());
-        $pubKeyArr = openssl_pkey_get_details($resPubKey);
-
-        $client = new ClcClient($this->server_address, $this->public_id, $pubKeyArr['key']);
-        $client->setVersion($GLOBALS['AUTH_CLIENT']['version']);
-
-        return $client;
-    }
-
-    /**
-     * redirect to CLC Server
-     */
-    public function runRequest()
-    {
-        $client = $this->getClcClient();
-        $client->setClientUrl($this->getReturnUrl());
-
-        $requestUrl = $client->generateRequestUrl();
-
-        // Save timestamp to session
-        $genTimestamp = $client->getGenerationTimestamp();
-        $_SESSION['clc_gen_timestamp'] = $genTimestamp;
-
-        // Forward
-        header("Location: " . $requestUrl);
-        exit;
-    }
-
-    /**
      * check the response of the clc server
      * trigger login if response in valid
      *
@@ -106,59 +71,7 @@ class OAuth2Provider extends AuthProvider
      */
     public function onSubmitDcForm($dc)
     {
-        if ($dc->activeRecord->server_key != '')
-        {
-            $keyPath = $dc->activeRecord->server_key;
-
-            if (!is_array($dc->activeRecord->server_key)) {
-
-                // check if serialized
-                if (substr(trim($keyPath), 0, 1) != 'a') {
-                    return;
-                }
-
-                // unserialize
-                $keyPath = unserialize($keyPath);
-            }
-
-            if(empty($keyPath[0])) {
-                throw new \Exception('Couldn´t get cert file path!');
-            }
-
-            $keyPath = trim(TL_ROOT . '/' . $keyPath[0]);
-
-            $strKey = file_get_contents($keyPath);
-            unlink($keyPath);
-
-            $authServer = AuthClientServerModel::findById($dc->activeRecord->id);
-            $authServer->server_key = $strKey;
-
-            // OpenSSL
-            $arrCert = @openssl_x509_parse($strKey);
-            if(is_array($arrCert)) {
-                $certName = $arrCert['subject']['O'];
-
-                if(isset($arrCert['subject']['OU']) &&  $arrCert['subject']['OU'] != '') {
-                    $certName .= ' | ' . $arrCert['subject']['OU'];
-                }
-
-                $authServer->name = $certName;
-                $authServer->validTo = $arrCert['validTo_time_t'];
-
-                // URI
-                if(str_replace('URI:', '', $arrCert['subject']['CN']) !== $arrCert['subject']['CN']) {
-                    $authServer->server_address = str_replace('URI:', '', $arrCert['subject']['CN']);
-                }
-                else {
-                    throw new \Exception('No URI in Certificate CN given.');
-                }
-
-            }
-            else {
-                throw new \Exception('Error reading cert file!');
-            }
-
-
+       /*
             // Request Public id
             $authServer->public_id = $this->requestPublicId(
                 $authServer->server_address,
@@ -171,34 +84,9 @@ class OAuth2Provider extends AuthProvider
 
             // Save auth server model
             $authServer->save();
-        }
-        else {
-            throw new \Exception('Certification file is empty!');
-        }
+            */
     }
 
-    /**
-     * Display information about the certificate
-     *
-     * @param $value
-     * @param $dc
-     * @return string
-     */
-    public function getAuthServerInfo($value, $dc) {
-        $authServer = AuthClientServerModel::findById($dc->activeRecord->id);
-        $arrInfo = array();
-
-        if($authServer->server_key != '') {
-            $arrCert = @openssl_x509_parse($authServer->server_key);
-            $arrInfo[] = $arrCert['extensions']['subjectKeyIdentifier'];
-            $arrInfo[] = $arrCert['subject']['O'] . ' | '.$arrCert['subject']['OU'];
-            $arrInfo[] = $arrCert['subject']['L'].' - '.$arrCert['subject']['ST'].' - '.$arrCert['subject']['C'];
-            $arrInfo[] = $arrCert['subject']['CN'];
-            $arrInfo[] = 'VALID:'.date('d-m-Y', (int) $authServer->validTo);
-        }
-
-        return implode("\n", $arrInfo);
-    }
 
     /**
      * request a public id for this client
@@ -249,19 +137,24 @@ class OAuth2Provider extends AuthProvider
     }
     
     /**
-     * generate OAuth Authorization Url
+     * Generate OAuth Authorization Url
      */
     public function generateAuthorizationUrl(SuperLoginServerModel $server)
     {
         $provider = new OAuth2GenericProvider([
-            'clientId'                => $server->public_id,    // The client ID assigned to you by the provider
-            'clientSecret'            => $server->secret,   // The client password assigned to you by the provider
-            'redirectUri'             => 'http://example.com/your-redirect-url/',
+            'clientId'                => $server->public_id,
+            'clientSecret'            => $server->secret,
+            'redirectUri'             => $this->getReturnUrl($server->id),
             'urlAuthorize'            => $server->url_authorize,
             'urlAccessToken'          => $server->url_access_token,
             'urlResourceOwnerDetails' => $server->url_resource_owner_details,
         ]);
-
-        return $provider->getAuthorizationUrl();
+        
+        $url = $provider->getAuthorizationUrl();
+        
+        // Set state to session
+        \System::getContainer()->get('session')->set('oauth2state', $provider->getState());
+        
+        return $url;
     }
 }

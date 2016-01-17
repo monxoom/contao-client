@@ -30,7 +30,7 @@ abstract class AuthProvider extends \System
     protected $server_address;
     protected $public_id;
     protected $private_key;
-    protected $auth_server_id;
+    protected $serverId;
     protected $server_key;
 
 
@@ -38,8 +38,8 @@ abstract class AuthProvider extends \System
 
     }
 
-    public function setAuthServerId($auth_server_id) {
-        $this->auth_server_id = $auth_server_id;
+    public function setServerId($serverId) {
+        $this->serverId = $serverId;
     }
 
     public function setServerAddress($server_address) {
@@ -54,12 +54,16 @@ abstract class AuthProvider extends \System
         $this->runRequest();
     }
 
-    public function getReturnUrl() {
-
-        $uri = $this->Environment->url . $this->Environment->requestUri;
-        $delimiter = (\Input::get('referer')) ? '&' : '?';
-
-        return $uri . $delimiter . 'authid=' . $this->auth_server_id;
+    public function getReturnUrl($serverId) {
+        
+        $returnUrl = \System::getContainer()->get('router')->generate('superlogin_auth', ['serverId' => $serverId], true);
+        
+        //$returnUrl = $this->Environment->url . $this->Environment->requestUri;
+        //$delimiter = (\Input::get('referer')) ? '&' : '?';
+        
+        //$returnUrl = $baseUrl . 
+        
+        return $returnUrl;
     }
 
     public function onSubmitDcForm($dc) {
