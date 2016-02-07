@@ -36,11 +36,8 @@ class SuperLoginServerModel extends \Model
     
     public function getRedirectUrl()
     {
-        $provider = \System::getContainer()->get('superlogin.server_manager')->createOAuth2Provider($this);
-        $authorizationUrl = $provider->getAuthorizationUrl();
-        \System::getContainer()->get('session')->set('oauth2state', $provider->getState());
-        
-        return  $authorizationUrl;
+        return \System::getContainer()->get('router')
+                ->generate('superlogin_auth_redirect', array('serverId' => $this->id));
     }
 
 }

@@ -7,13 +7,39 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use League\OAuth2\Client\Provider\GenericProvider as OAuth2GenericProvider;
-use \League\OAuth2\Client\Provider\Exception\IdentityProviderException;
+use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use Comolo\SuperLoginClient\ContaoEdition\Model\SuperLoginServerModel;
 use Comolo\SuperLoginClient\ContaoEdition\Foundation\User\RemoteContaoUser;
 use Comolo\SuperLoginClient\ContaoEdition\Exception\InvalidUserDetailsException;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class AuthorizationController extends Controller
 {
+    /**
+     * Redirect the user to the oauth server
+     * 
+     */
+    public function redirectAction($serverId)
+    {
+        $server = $this->get('superlogin.server_manager')->find($serverId); 
+        
+        // Server not found
+        if (!$server) {
+            throw new AccessDeniedHttpException('Unknown server');
+        }
+        
+        // Create oauth client instance
+        $provider = $this->get('superlogin.server_manager')->createOAuth2Provider($server);
+        $authorizationUrl = $provider->getAuthorizationUrl();
+        
+        // Store state in session
+        $this->get('session')->set('oauth2state', $provider->getState());
+        
+        // Redirect user
+        return new RedirectResponse($authorizationUrl, 302);
+        
+    }
+    
     public function authorizationAction($serverId)
     {
         $server = $this->get('superlogin.server_manager')->find($serverId);  

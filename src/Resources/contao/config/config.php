@@ -11,7 +11,7 @@
  * @copyright 2014-2015 Hendrik Obermayer
  */
 
-$GLOBALS['TL_HOOKS']['parseBackendTemplate'][] = array('\Comolo\SuperLoginClient\ContaoEdition\Module\LoginAuth', 'addServersToLoginPage');
+$GLOBALS['TL_HOOKS']['parseBackendTemplate'][] = array('\Comolo\SuperLoginClient\ContaoEdition\Module\DisplayAuthProviders', 'addServersToLoginPage');
 
 $GLOBALS['BE_MOD']['superlogin']['superlogin_auth_servers'] = array(
     'tables'       => array('tl_superlogin_server'),

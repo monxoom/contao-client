@@ -27,7 +27,7 @@ use Comolo\SuperLoginClient\ContaoEdition\Model\SuperLoginServerModel;
  * @author     Hendrik Obermayer - Comolo GmbH
  * @package    Devtools
  */
-class LoginAuth extends \System
+class DisplayAuthProviders extends \System
 {
     /**
      * Display option field in backend login
