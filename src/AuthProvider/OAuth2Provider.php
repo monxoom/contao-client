@@ -30,38 +30,6 @@ use League\OAuth2\Client\Provider\GenericProvider as OAuth2GenericProvider;
 class OAuth2Provider extends AuthProvider
 {
     /**
-     * check the response of the clc server
-     * trigger login if response in valid
-     *
-     * @return bool|mixed
-     * @throws \Exception
-     */
-    public function checkResponse()
-    {
-        $requestHash = urldecode(\Input::post('rqh'));
-        $responseHash = urldecode(\Input::post('rsh'));
-        $responseData = urldecode(\Input::post('rdata'));
-
-        $generationTime = (isset($_SESSION['clc_gen_timestamp'])) ? $_SESSION['clc_gen_timestamp'] : false;
-
-        if ($requestHash && $responseHash && $generationTime)
-        {
-            $client = $this->getClcClient();
-
-            if (
-                true === $client->checkRequestHash($requestHash, $generationTime) &&
-                true === $client->checkResponseHash($responseHash, $requestHash, $responseData)
-            ) {
-                return unserialize($responseData);
-            }
-            else {
-                throw new \Exception('Invalid response data!');
-                return false;
-            }
-        }
-    }
-
-    /**
      * called when the backend form was saved
      * check certificate and write it to the database
      *
@@ -134,27 +102,5 @@ class OAuth2Provider extends AuthProvider
         }
 
         throw new \Exception("Could not get public id! Error: " . htmlentities($result));
-    }
-    
-    /**
-     * Generate OAuth Authorization Url
-     */
-    public function generateAuthorizationUrl(SuperLoginServerModel $server)
-    {
-        $provider = new OAuth2GenericProvider([
-            'clientId'                => $server->public_id,
-            'clientSecret'            => $server->secret,
-            'redirectUri'             => $this->getReturnUrl($server->id),
-            'urlAuthorize'            => $server->url_authorize,
-            'urlAccessToken'          => $server->url_access_token,
-            'urlResourceOwnerDetails' => $server->url_resource_owner_details,
-        ]);
-        
-        $url = $provider->getAuthorizationUrl();
-        
-        // Set state to session
-        \System::getContainer()->get('session')->set('oauth2state', $provider->getState());
-        
-        return $url;
     }
 }

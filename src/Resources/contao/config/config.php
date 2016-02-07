@@ -11,9 +11,6 @@
  * @copyright 2014-2015 Hendrik Obermayer
  */
 
-$GLOBALS['TL_HOOKS']['checkCredentials'][] = array('\Comolo\SuperLoginClient\ContaoEdition\Module\LoginAuth', 'loginUserHookPassword');
-$GLOBALS['TL_HOOKS']['initializeSystem'][] = array('\Comolo\SuperLoginClient\ContaoEdition\Module\LoginAuth', 'listenForAuthResponse');
-$GLOBALS['TL_HOOKS']['initializeSystem'][] = array('\Comolo\SuperLoginClient\ContaoEdition\Module\LoginAuth', 'listenForAuthRequest');
 $GLOBALS['TL_HOOKS']['parseBackendTemplate'][] = array('\Comolo\SuperLoginClient\ContaoEdition\Module\LoginAuth', 'addServersToLoginPage');
 
 $GLOBALS['BE_MOD']['superlogin']['superlogin_auth_servers'] = array(

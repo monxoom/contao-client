@@ -54,18 +54,6 @@ abstract class AuthProvider extends \System
         $this->runRequest();
     }
 
-    public function getReturnUrl($serverId) {
-        
-        $returnUrl = \System::getContainer()->get('router')->generate('superlogin_auth', ['serverId' => $serverId], true);
-        
-        //$returnUrl = $this->Environment->url . $this->Environment->requestUri;
-        //$delimiter = (\Input::get('referer')) ? '&' : '?';
-        
-        //$returnUrl = $baseUrl . 
-        
-        return $returnUrl;
-    }
-
     public function onSubmitDcForm($dc) {
         return;
     }
