@@ -1,6 +1,6 @@
 {
     "name":"superlogin/contao-client",
-    "description":"SuperLogin Client for Contao 3",
+    "description":"SuperLogin Client for Contao 4",
     "keywords":["contao","login"],
     "type":"symfony-bundle",
     "homepage":"http://www.comolo.de",
