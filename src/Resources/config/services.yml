@@ -1,11 +1,4 @@
 services:
-    superlogin.listener:
-        class: Comolo\SuperLoginClient\ContaoEdition\EventListener\SuperLoginListener
-        arguments:
-            - "@router"
-        tags:
-            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 63 }
-    
     superlogin.server_manager:
         class: Comolo\SuperLoginClient\ContaoEdition\Foundation\Server\ServerManager
         arguments:
