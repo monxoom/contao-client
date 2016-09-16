@@ -33,7 +33,7 @@ class ServerManager
 
     public function generateReturnUrl($id)
     {
-		return $this->router->generateUrl('superlogin_auth', ['serverId' => $id], UrlGeneratorInterface::ABSOLUTE_URL);
+		return $this->router->generate('superlogin_auth', ['serverId' => $id], UrlGeneratorInterface::ABSOLUTE_URL);
     }
 
     public function createOAuth2Provider($server)
