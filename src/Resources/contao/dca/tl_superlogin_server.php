@@ -41,7 +41,7 @@ $GLOBALS['TL_DCA']['tl_superlogin_server'] = array
 		'sorting' => array
 		(
 			'mode'                    => 0,
-			'fields'                  => array(''),
+			'fields'                  => array('name'),
 			'flag'                    => 1
 		),
 		'label' => array
@@ -133,10 +133,9 @@ $GLOBALS['TL_DCA']['tl_superlogin_server'] = array
 			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'w50 wizard'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
-        
+
         // Todo: add docp (dynamic oath2 configuration protocol)
         // ToDo: enabled checkbox
-        
         'url_authorize' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_superlogin_server']['url_authorize'],
@@ -145,7 +144,6 @@ $GLOBALS['TL_DCA']['tl_superlogin_server'] = array
             'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50 wizard', 'mandatory'=>true),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-        
         'url_access_token' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_superlogin_server']['url_authorize'],
@@ -154,7 +152,6 @@ $GLOBALS['TL_DCA']['tl_superlogin_server'] = array
             'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50 wizard', 'mandatory'=>true),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-        
         'url_resource_owner_details' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_superlogin_server']['url_authorize'],
@@ -163,7 +160,6 @@ $GLOBALS['TL_DCA']['tl_superlogin_server'] = array
             'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50 wizard', 'mandatory'=>true),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-
         'public_id' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_superlogin_server']['publicId'],
@@ -172,7 +168,6 @@ $GLOBALS['TL_DCA']['tl_superlogin_server'] = array
             'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50 wizard', 'mandatory'=>true),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-
         'secret' => array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_superlogin_server']['secret'],
