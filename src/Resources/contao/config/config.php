@@ -11,6 +11,10 @@
  * @copyright 2014-2015 Hendrik Obermayer
  */
 
+if (TL_MODE == 'BE') {
+	$GLOBALS['TL_CSS'][] = '/bundles/comolosuperloginclient/css/backend.css';
+}
+
 $GLOBALS['TL_HOOKS']['parseBackendTemplate'][] = array('\Comolo\SuperLoginClient\ContaoEdition\Module\DisplayAuthProviders', 'addServersToLoginPage');
 
 $GLOBALS['BE_MOD']['superlogin']['superlogin_auth_servers'] = array(
