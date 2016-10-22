@@ -146,7 +146,7 @@ $GLOBALS['TL_DCA']['tl_superlogin_server'] = array
         ),
         'url_access_token' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_superlogin_server']['url_authorize'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_superlogin_server']['url_access_token'],
             'inputType'               => 'text',
             'exclude'                 => true,
             'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50 wizard', 'mandatory'=>true),
@@ -154,7 +154,7 @@ $GLOBALS['TL_DCA']['tl_superlogin_server'] = array
         ),
         'url_resource_owner_details' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_superlogin_server']['url_authorize'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_superlogin_server']['url_resource_owner_details'],
             'inputType'               => 'text',
             'exclude'                 => true,
             'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50 wizard', 'mandatory'=>true),
@@ -162,7 +162,7 @@ $GLOBALS['TL_DCA']['tl_superlogin_server'] = array
         ),
         'public_id' => array
         (
-            'label'                   => &$GLOBALS['TL_LANG']['tl_superlogin_server']['publicId'],
+            'label'                   => &$GLOBALS['TL_LANG']['tl_superlogin_server']['public_id'],
             'inputType'               => 'text',
             'exclude'                 => true,
             'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50 wizard', 'mandatory'=>true),
