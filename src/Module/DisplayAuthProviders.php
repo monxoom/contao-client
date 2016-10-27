@@ -46,10 +46,13 @@ class DisplayAuthProviders extends \System
             // TODO: Check if server is enabled
             $searchString = '<div id="tl_license">';
             $strContent = str_replace($searchString, $template->parse().$searchString, $strContent);
-            
+
+			// Environment
+			$environment = Environment::getInstance();
+
             // Add CSS
             $searchString = '</head>';
-            $cssLink = '<link rel="stylesheet" href="/bundles/comolosuperloginclient/css/superlogin.css">';
+            $cssLink = '<link rel="stylesheet" href="'.$environment->path.'/bundles/comolosuperloginclient/css/superlogin.css">';
             $strContent = str_replace($searchString, $cssLink.$searchString, $strContent);
         }
 
