@@ -2,7 +2,7 @@
     "name":"superlogin/contao-client",
     "description":"SuperLogin Client for Contao 4",
     "keywords":["contao","login"],
-    "type":"symfony-bundle",
+    "type":"contao-module",
     "homepage":"http://www.comolo.de",
     "license":"proprietary",
     "authors":[{
@@ -18,5 +18,8 @@
         "psr-4": {
             "Comolo\\SuperLoginClient\\ContaoEdition\\": "src/"
         }
+    },
+    "extra": {
+        "contao-manager-plugin": "Comolo\\SuperLoginClient\\ContaoEdition\\ContaoManager\\Plugin"
     }
 }
