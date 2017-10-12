@@ -12,7 +12,8 @@
     }],
     "require": {
 		"league/oauth2-client": "~1.1",
-        "contao/contao": "~4.2"
+        "symfony/framework-bundle": "^3.3",
+        "contao/core-bundle": "^4.4"
     },
     "autoload":{
         "psr-4": {

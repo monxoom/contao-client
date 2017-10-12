@@ -12,7 +12,6 @@ use Symfony\Component\HttpKernel\KernelInterface;
 use Contao\ManagerPlugin\Routing\RoutingPluginInterface;
 use Contao\ManagerPlugin\Config\ConfigPluginInterface;
 
-
 /**
  * Plugin for the Contao Manager.
  *
