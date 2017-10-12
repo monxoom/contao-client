@@ -18,7 +18,7 @@
 namespace Comolo\SuperLoginClient\ContaoEdition\Module;
 
 use Comolo\SuperLoginClient\ContaoEdition\Model\SuperLoginServerModel;
-
+use Environment;
 
 /**
  * Class LoginAuth
@@ -44,15 +44,12 @@ class DisplayAuthProviders extends \System
             $template->loginServers = SuperLoginServerModel::findAll();
 
             // TODO: Check if server is enabled
-            $searchString = '<div id="tl_license">';
+            $searchString = '<div class="tl_info" id="javascript">';
             $strContent = str_replace($searchString, $template->parse().$searchString, $strContent);
-
-			// Environment
-			$environment = Environment::getInstance();
 
             // Add CSS
             $searchString = '</head>';
-            $cssLink = '<link rel="stylesheet" href="'.$environment->path.'/bundles/comolosuperloginclient/css/superlogin.css">';
+            $cssLink = '<link rel="stylesheet" href="'.Environment::get('path').'/bundles/comolosuperloginclient/css/superlogin.css">';
             $strContent = str_replace($searchString, $cssLink.$searchString, $strContent);
         }
 

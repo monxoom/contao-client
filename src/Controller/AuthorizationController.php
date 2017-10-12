@@ -2,6 +2,7 @@
 
 namespace Comolo\SuperLoginClient\ContaoEdition\Controller;
 
+use Comolo\SuperLoginClient\ContaoEdition\Foundation\Server\ServerManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
@@ -9,7 +10,6 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use League\OAuth2\Client\Provider\GenericProvider as OAuth2GenericProvider;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use Comolo\SuperLoginClient\ContaoEdition\Model\SuperLoginServerModel;
-use Comolo\SuperLoginClient\ContaoEdition\Foundation\User\RemoteContaoUser;
 use Comolo\SuperLoginClient\ContaoEdition\Exception\InvalidUserDetailsException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -29,6 +29,7 @@ class AuthorizationController extends Controller
         }
 
         // Create oauth client instance
+        /** @var OAuth2GenericProvider $provider */
         $provider = $this->get('superlogin.server_manager')->createOAuth2Provider($server);
         $authorizationUrl = $provider->getAuthorizationUrl();
 
@@ -53,6 +54,7 @@ class AuthorizationController extends Controller
         }
 
         // Init provider
+        /** @var OAuth2GenericProvider $provider */
         $provider = $this->get('superlogin.server_manager')->createOAuth2Provider($server);
 
         // Validate state

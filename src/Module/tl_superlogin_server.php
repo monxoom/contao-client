@@ -13,6 +13,7 @@ use Comolo\SuperLoginClient\ContaoEdition\Model\SuperLoginServerModel;
 /**
  * Class tl_superlogin_server
  * @package AuthClient
+ * @deprecated
  */
 class tl_superlogin_server
 {
