@@ -10,58 +10,68 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Contao\BackendUser as ContaoBackendUser;
 use Symfony\Component\DependencyInjection\ContainerInterface as Container;
 use Comolo\SuperLoginClient\ContaoEdition\Foundation\User\RemoteUserInterface;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
+use Symfony\Component\BrowserKit\Cookie;
 
 class ContaoBackendLogin
 {
-    protected $remoteUser;
     protected $container;
-    static protected $grantLogin = false;
-    static protected $grantLoginUsername = '';
+	protected static $loginGranted = false;
 
-    public function setContainer(Container $container)
+	public function setContainer(Container $container)
     {
         $this->container = $container;
     }
 
-    public function setRemoteUser(RemoteUserInterface $remoteUser)
+    public function login(RemoteUserInterface $remoteUser)
     {
-        $this->remoteUser = $remoteUser;
-    }
-
-    public function login()
-    {
-        $this->container->get('contao.framework')->initialize();
-        $user = ContaoBackendUser::getInstance();
-
-        // Prepare for login
-        $_POST['username'] = $this->remoteUser->getUsername();
-        $_POST['password'] = '####';
-
-        // Activate password hook
-        self::$grantLogin = true;
-        self::$grantLoginUsername = $this->remoteUser->getUsername();
-
+		if (!$this->container) {
+			throw new \Exception('Container missing');
+		}
+		
+		$this->container->get('contao.framework')->initialize();
+		
         // Add contao hook
+		// Will be deprecated in Contao 5!!
         $GLOBALS['TL_HOOKS']['checkCredentials'][] = [
             'Comolo\SuperLoginClient\ContaoEdition\Foundation\Security\ContaoBackendLogin',
             'hookCheckCredentials'
         ];
+		self::$loginGranted = true;
+		
 
-        return $user->login();
+		$user = $this->container->get('contao.security.backend_user_provider')->loadUserByUsername($remoteUser->getUsername());
+		$session = $this->container->get('session');
 
-        /*
-        // Create token
-        $token = new ContaoToken($contaoUser);
-        $this->get('security.context')->setToken($token);
+		$firewallContext = 'contao_backend';
 
-        $request = $this->get('request_stack')->getCurrentRequest();
+
+		$token = new UsernamePasswordToken(
+			$user->username, 
+			null,
+			$firewallContext,
+			$user->getRoles()
+		);
+
+		$authToken = $this->container->get('security.authentication.manager')->authenticate($token);
+		$this->container->get('security.token_storage')->setToken($authToken); // $authToken
+		
+		/*
+        $request = $this->container->get('request_stack')->getCurrentRequest();
         $event = new InteractiveLoginEvent($request, $token);
-        $this->get('event_dispatcher')->dispatch('security.interactive_login', $event);
-        */
+        $this->container->get('event_dispatcher')->dispatch('security.interactive_login', $event);
+		*/
+		
+		$session->set('_security_'.$firewallContext, serialize($authToken));
+		$session->save();
     }
-
-    public function hookCheckCredentials($username, $password)
-    {
-        return (self::$grantLogin && self::$grantLoginUsername == $username);
-    }
+	
+	/**
+	 * Overwrite contao password mechanism
+	 */
+	public function hookCheckCredentials()
+	{
+		return self::$loginGranted;
+	}
 }

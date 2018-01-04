@@ -11,3 +11,6 @@ services:
             - "@service_container"
             - "@database_connection"
             - "@router"
+
+    Comolo\SuperLoginClient\ContaoEdition\Foundation\Security:
+        autowire: true

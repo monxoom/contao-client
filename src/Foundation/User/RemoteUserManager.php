@@ -70,16 +70,14 @@ class RemoteUserManager
     }
     
     public function loginAs(RemoteUserInterface $user)
-    {
+    {	
         // Check if user already exists in the database
         if (!$user->getId()) {
             throw new UserNotCreatedYetException();
         }
         
         $login = new ContaoBackendLogin();
-        $login->setRemoteUser($user);
         $login->setContainer($this->container);
-        
-        return $login->login();
+        return $login->login($user);
     }
 }
