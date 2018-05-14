@@ -29,10 +29,6 @@ $GLOBALS['TL_DCA']['tl_superlogin_server'] = array
 				'id' => 'primary'
 			)
 		),
-
-        'onsubmit_callback' => array(
-            //array('\Comolo\SuperLoginClient\ContaoEdition\Module\tl_superlogin_server', 'onSubmitDca')
-        ),
 	),
 
 	// List

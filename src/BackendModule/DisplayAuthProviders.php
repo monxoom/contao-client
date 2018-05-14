@@ -11,11 +11,7 @@
  * @copyright 2014 Hendrik Obermayer
  */
 
-
-/**
- * Namespace
- */
-namespace Comolo\SuperLoginClient\ContaoEdition\Module;
+namespace Comolo\SuperLoginClient\ContaoEdition\BackendModule;
 
 use Comolo\SuperLoginClient\ContaoEdition\Model\SuperLoginServerModel;
 use Environment;
@@ -23,9 +19,8 @@ use Environment;
 /**
  * Class LoginAuth
  *
- * @copyright  2014 Hendrik Obermayer
+ * @copyright  2014-2018 Hendrik Obermayer
  * @author     Hendrik Obermayer - Comolo GmbH
- * @package    Devtools
  */
 class DisplayAuthProviders extends \System
 {
@@ -43,11 +38,9 @@ class DisplayAuthProviders extends \System
             $template = new \BackendTemplate('mod_superlogin_loginpage');
             $template->loginServers = SuperLoginServerModel::findAll();
 
-            // TODO: Check if server is enabled
             $searchString = '<div class="tl_info" id="javascript">';
             $strContent = str_replace($searchString, $template->parse().$searchString, $strContent);
 
-            // Add CSS
             $searchString = '</head>';
             $cssLink = '<link rel="stylesheet" href="'.Environment::get('path').'/bundles/comolosuperloginclient/css/superlogin.css">';
             $strContent = str_replace($searchString, $cssLink.$searchString, $strContent);

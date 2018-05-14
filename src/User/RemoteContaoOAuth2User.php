@@ -1,22 +1,15 @@
 <?php
-namespace Comolo\SuperLoginClient\ContaoEdition\Foundation\User;
+namespace Comolo\SuperLoginClient\ContaoEdition\User;
 
-use Comolo\SuperLoginClient\ContaoEdition\Foundation\User\RemoteUserInterface;
 
 class RemoteContaoOAuth2User implements RemoteUserInterface
 {
     protected $userData;
-    protected $connection;
     protected $id;
     
     public function __construct()
     {
         $this->setDefaultUserData();
-    }
-    
-    public function setDatabaseConnection($connection)
-    {
-        $this->connection = $connection;
     }
     
     public function set($key, $value)

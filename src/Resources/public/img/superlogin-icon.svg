@@ -1,16 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="100%" height="100%" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
-    <g>
-        <g transform="matrix(1.89662,0,0,1.89662,-15.5675,-15.3789)">
-            <path d="M11.027,11.745L11.027,10.427C11.027,10.087 11.314,9.802 11.652,9.802L13.282,9.802C13.621,9.802 13.908,10.087 13.908,10.427L13.908,11.745L14.867,11.745L14.867,10.427C14.864,9.559 14.15,8.846 13.282,8.843L11.652,8.843C10.784,8.846 10.071,9.559 10.068,10.427L10.068,11.745L11.027,11.745Z" style="fill:url(#_Linear1);fill-rule:nonzero;"/>
-        </g>
-        <g transform="matrix(1.89662,0,0,1.89662,-15.5675,-15.3789)">
-            <path d="M15.436,15.614C15.437,15.789 15.294,15.933 15.119,15.935L9.823,15.935C9.647,15.935 9.501,15.79 9.5,15.614L9.5,11.907C9.5,11.728 9.645,11.585 9.823,11.585L15.114,11.585C15.293,11.585 15.435,11.731 15.435,11.907L15.435,15.614L15.436,15.614Z" style="fill:url(#_Linear2);fill-rule:nonzero;"/>
-        </g>
-    </g>
-    <defs>
-        <linearGradient id="_Linear1" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(3.38512,3.38499,-3.38499,3.38512,10.7754,9.06775)"><stop offset="0%" style="stop-color:rgb(153,153,153);stop-opacity:1"/><stop offset="100%" style="stop-color:rgb(102,102,102);stop-opacity:1"/></linearGradient>
-        <linearGradient id="_Linear2" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(4.95514,4.95498,-4.95498,4.95514,9.99036,11.283)"><stop offset="0%" style="stop-color:rgb(255,173,0);stop-opacity:1"/><stop offset="100%" style="stop-color:rgb(214,137,0);stop-opacity:1"/></linearGradient>
-    </defs>
-</svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg width="100%" height="100%" viewBox="0 0 13 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;"><g><path d="M10.776,11.551l0,-6.702l-8.552,0l0,6.702l8.552,0Z" style="fill:#91979c;"/><ellipse cx="6.5" cy="5.401" rx="2.761" ry="3.952" style="fill:#91979c;fill-opacity:0;stroke:#91979c;stroke-width:1px;"/></g></svg>

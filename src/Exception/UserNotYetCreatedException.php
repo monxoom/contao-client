@@ -3,7 +3,7 @@
 namespace Comolo\SuperLoginClient\ContaoEdition\Exception;
 use \Exception;
 
-class UserNotCreatedYetException extends Exception 
+class UserNotYetCreatedException extends Exception
 {
     
 }
