@@ -22,3 +22,4 @@ Clear your internal cache and update your database with the InstallTool.
 ## Release notes
 * Added Contao 4.5 Support
 * Fixed design of the login box
+
