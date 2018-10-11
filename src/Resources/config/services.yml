@@ -7,6 +7,7 @@ services:
 
     superlogin.remote_user:
         class: Comolo\SuperLoginClient\ContaoEdition\Foundation\User\RemoteUserManager
+        public: true
         arguments:
             - "@service_container"
             - "@database_connection"
