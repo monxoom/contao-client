@@ -1,6 +1,7 @@
 services:
     superlogin.server_manager:
         class: Comolo\SuperLoginClient\ContaoEdition\Foundation\Server\ServerManager
+        public: true
         arguments:
             - "@database_connection"
             - "@router"
