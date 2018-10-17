@@ -2,16 +2,11 @@
 
 namespace Comolo\SuperLoginClient\ContaoEdition\Controller;
 
-use Comolo\SuperLoginClient\ContaoEdition\Foundation\Server\ServerManager;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
-use League\OAuth2\Client\Provider\GenericProvider as OAuth2GenericProvider;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
-use Comolo\SuperLoginClient\ContaoEdition\Model\SuperLoginServerModel;
-use Comolo\SuperLoginClient\ContaoEdition\Exception\InvalidUserDetailsException;
+use League\OAuth2\Client\Provider\GenericProvider as OAuth2GenericProvider;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class AuthorizationController extends Controller
 {

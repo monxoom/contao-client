@@ -75,9 +75,9 @@ class RemoteUserManager
         if (!$user->getId()) {
             throw new UserNotCreatedYetException();
         }
-        
-        $login = new ContaoBackendLogin();
-        $login->setContainer($this->container);
+
+        $login = $this->container->get(ContaoBackendLogin::class);
+
         return $login->login($user);
     }
 }

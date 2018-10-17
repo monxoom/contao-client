@@ -16,3 +16,4 @@ services:
 
     Comolo\SuperLoginClient\ContaoEdition\Foundation\Security:
         autowire: true
+
