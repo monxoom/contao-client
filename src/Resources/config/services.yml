@@ -1,18 +1,19 @@
 services:
     superlogin.server_manager:
         class: Comolo\SuperLoginClient\ContaoEdition\Foundation\Server\ServerManager
-        public: true
+        public: true # TODO
         arguments:
             - "@database_connection"
             - "@router"
 
     superlogin.remote_user:
         class: Comolo\SuperLoginClient\ContaoEdition\Foundation\User\RemoteUserManager
-        public: true
+        public: true # TODO
         arguments:
             - "@service_container"
             - "@database_connection"
             - "@router"
 
     Comolo\SuperLoginClient\ContaoEdition\Foundation\Security\ContaoBackendLogin:
+        public: true # TODO
         autowire: true
