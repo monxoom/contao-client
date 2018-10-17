@@ -11,7 +11,6 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Contao\BackendUser as ContaoBackendUser;
 use Symfony\Component\DependencyInjection\ContainerInterface as Container;
 
-
 class RemoteUserManager
 { 
     protected $connection;
