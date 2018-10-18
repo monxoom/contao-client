@@ -61,9 +61,10 @@ class ContaoBackendLogin
     {
 		$user = $this->contaoUserProvider->loadUserByUsername($remoteUser->getUsername());
 
-        $this->session->set('debug_username', $user->username); // TODO
+		// \Contao\BackendUser::loadUserByUsername($username)
 
-		$token = new UsernamePasswordToken($user->username,null, self::SECURED_AREA, $user->getRoles());
+
+		$token = new UsernamePasswordToken($user,null, self::SECURED_AREA, $user->getRoles());
         $this->tokenStorage->setToken($token);
 
         $this->session->set('_security_'.self::SECURED_AREA, serialize($token));
