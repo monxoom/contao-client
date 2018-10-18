@@ -8,17 +8,17 @@
  * @package   AuthClient
  * @author    Hendrik Obermayer - Comolo GmbH
  * @license   -
- * @copyright 2014-2015 Hendrik Obermayer
+ * @copyright 2014-2018 Hendrik Obermayer
  */
 
-$environment = Environment::getInstance();
-
 if (TL_MODE == 'BE') {
-	$GLOBALS['TL_CSS'][] = $environment->path.'/bundles/comolosuperloginclient/css/backend.css';
+	$GLOBALS['TL_CSS'][] = Environment::get('path').'/bundles/comolosuperloginclient/css/backend.css';
 }
 
-$GLOBALS['TL_HOOKS']['parseBackendTemplate'][] = array('\Comolo\SuperLoginClient\ContaoEdition\Module\DisplayAuthProviders', 'addServersToLoginPage');
+$GLOBALS['TL_HOOKS']['parseBackendTemplate'][] = [
+    \Comolo\SuperLoginClient\ContaoEdition\Module\DisplayAuthProviders::class, 'addServersToLoginPage'
+];
 
-$GLOBALS['BE_MOD']['superlogin']['superlogin_auth_servers'] = array(
-    'tables'       => array('tl_superlogin_server'),
-);
+$GLOBALS['BE_MOD']['superlogin']['superlogin_auth_servers'] = [
+    'tables'       => ['tl_superlogin_server'],
+];

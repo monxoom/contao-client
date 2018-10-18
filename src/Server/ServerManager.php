@@ -46,7 +46,7 @@ class ServerManager
      * @param object $server
      * @return OAuth2GenericProvider
      */
-    public function createOAuth2Provider(object $server)
+    public function createOAuth2Provider($server)
     {
         return new OAuth2GenericProvider([
             'clientId'                => $server->public_id,
