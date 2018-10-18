@@ -11,6 +11,7 @@
         "role": "Developer"
     }],
     "require": {
+        "php": "^7.1",
 		"league/oauth2-client": "~1.1",
         "contao/core-bundle": ">=4.5,<5.0"
     },

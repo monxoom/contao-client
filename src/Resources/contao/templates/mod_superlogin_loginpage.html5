@@ -3,7 +3,7 @@
 	<div class="superlogin-login-box">
 	    <?php if ($this->loginServers):?>
 	    <?php foreach($this->loginServers as $k => $server): ?>
-	        <a href="<?php echo $server->getRedirectUrl(); ?>#" class="login-button" data-id="<?php echo $server->id; ?>"><?php echo $server->name; ?></a>
+	        <a href="<?php echo $server->getRedirectUrl(); ?>" class="login-button" data-id="<?php echo $server->id; ?>"><?php echo $server->name; ?></a>
 	    <?php endforeach; endif; ?>
 	</div>
 

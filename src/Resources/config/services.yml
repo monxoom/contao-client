@@ -1,18 +1,25 @@
 services:
-    superlogin.server_manager:
-        class: Comolo\SuperLoginClient\ContaoEdition\Foundation\Server\ServerManager
+    Comolo\SuperLoginClient\ContaoEdition\Server\ServerManager:
         public: true
-        arguments:
-            - "@database_connection"
-            - "@router"
-
-    superlogin.remote_user:
-        class: Comolo\SuperLoginClient\ContaoEdition\Foundation\User\RemoteUserManager
-        public: true
-        arguments:
-            - "@service_container"
-            - "@database_connection"
-            - "@router"
-
-    Comolo\SuperLoginClient\ContaoEdition\Foundation\Security:
         autowire: true
+
+    Comolo\SuperLoginClient\ContaoEdition\User\RemoteUserManager:
+        public: true
+        autowire: true
+
+    Comolo\SuperLoginClient\ContaoEdition\Security\ContaoBackendLogin:
+        public: true
+        autowire: true
+        arguments:
+            $contaoUserProvider: '@contao.security.backend_user_provider'
+            $authenticationManager: '@security.authentication.manager'
+            $tokenStorage: '@security.token_storage'
+
+    Comolo\SuperLoginClient\ContaoEdition\User\RemoteContaoOAuth2User:
+        public: true
+        autowire: true
+
+    Comolo\SuperLoginClient\ContaoEdition\Controller\AuthorizationController:
+        public: true
+        autowire: true
+        tags: ['controller.service_arguments']
