@@ -2,8 +2,8 @@
 
 namespace Comolo\SuperLoginClient\ContaoEdition\Controller;
 
-use Comolo\SuperLoginClient\ContaoEdition\Foundation\Server\ServerManager;
-use Comolo\SuperLoginClient\ContaoEdition\Foundation\User\RemoteUserManager;
+use Comolo\SuperLoginClient\ContaoEdition\Server\ServerManager;
+use Comolo\SuperLoginClient\ContaoEdition\User\RemoteUserManager;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use League\OAuth2\Client\Provider\GenericProvider as OAuth2GenericProvider;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

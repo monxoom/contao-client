@@ -1,5 +1,5 @@
 <?php
-namespace Comolo\SuperLoginClient\ContaoEdition\Foundation\Server;
+namespace Comolo\SuperLoginClient\ContaoEdition\Server;
 
 use Comolo\SuperLoginClient\ContaoEdition\Model\SuperLoginServerModel;
 use Doctrine\DBAL\Driver\Connection;

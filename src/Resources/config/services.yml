@@ -1,19 +1,19 @@
 services:
-    Comolo\SuperLoginClient\ContaoEdition\Foundation\Server\ServerManager:
+    Comolo\SuperLoginClient\ContaoEdition\Server\ServerManager:
         public: true
         autowire: true
 
-    Comolo\SuperLoginClient\ContaoEdition\Foundation\User\RemoteUserManager:
+    Comolo\SuperLoginClient\ContaoEdition\User\RemoteUserManager:
         public: true
         autowire: true
 
-    Comolo\SuperLoginClient\ContaoEdition\Foundation\Security\ContaoBackendLogin:
+    Comolo\SuperLoginClient\ContaoEdition\Security\ContaoBackendLogin:
         public: true
         autowire: true
         arguments:
             $contaoUserProvider: '@contao.security.backend_user_provider'
 
-    Comolo\SuperLoginClient\ContaoEdition\Foundation\User\RemoteContaoOAuth2User:
+    Comolo\SuperLoginClient\ContaoEdition\User\RemoteContaoOAuth2User:
         public: true
         autowire: true
 

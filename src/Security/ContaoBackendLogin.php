@@ -1,8 +1,8 @@
 <?php
-namespace Comolo\SuperLoginClient\ContaoEdition\Foundation\Security;
+namespace Comolo\SuperLoginClient\ContaoEdition\Security;
 
 
-use Comolo\SuperLoginClient\ContaoEdition\Foundation\User\RemoteUserInterface;
+use Comolo\SuperLoginClient\ContaoEdition\User\RemoteUserInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Contao\CoreBundle\Security\User\ContaoUserProvider;
 use Contao\CoreBundle\Framework\ContaoFrameworkInterface;
@@ -52,12 +52,8 @@ class ContaoBackendLogin
          * Will be deprecated in Contao 5!!
          * @deprecated contains deprecated code
          */
-        $GLOBALS['TL_HOOKS']['checkCredentials'][] = [
-            'Comolo\SuperLoginClient\ContaoEdition\Foundation\Security\ContaoBackendLogin',
-            'hookCheckCredentials'
-        ];
+        $GLOBALS['TL_HOOKS']['checkCredentials'][] = [ContaoBackendLogin::class, 'hookCheckCredentials'];
 		self::$loginGranted = true;
-		
 
 		$user = $this->contaoUserProvider->loadUserByUsername($remoteUser->getUsername());
 
