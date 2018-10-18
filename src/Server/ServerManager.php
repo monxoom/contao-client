@@ -24,12 +24,16 @@ class ServerManager
         $this->contaoFramework = $contaoFramework;
     }
 
-    public function find(int $id)
+    public function find(int $serverId)
     {
         if (!$this->contaoFramework->isInitialized()) $this->contaoFramework->initialize();
 
+        return SuperLoginServerModel::findById($serverId);
+        // TODO
+
+        /*
         $stmt = $this->connection->prepare('SELECT * FROM tl_superlogin_server WHERE id = :id LIMIT 1');
-        $stmt->bindValue('id', $id);
+        $stmt->bindValue('id', $serverId);
         $stmt->execute();
         $result = $stmt->fetchAll();
 
@@ -38,6 +42,7 @@ class ServerManager
         }
 
         return null;
+        */
     }
 
     public function generateReturnUrl(int $id)

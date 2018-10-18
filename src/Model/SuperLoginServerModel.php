@@ -13,6 +13,11 @@
 
 namespace Comolo\SuperLoginClient\ContaoEdition\Model;
 
+/**
+ * Class SuperLoginServerModel
+ * @package Comolo\SuperLoginClient\ContaoEdition\Model
+ * @method static findById(int $serverId)
+ */
 class SuperLoginServerModel extends \Model
 {
 	protected static $strTable = 'tl_superlogin_server';

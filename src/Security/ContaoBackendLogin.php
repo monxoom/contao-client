@@ -64,8 +64,8 @@ class ContaoBackendLogin
          * Will be deprecated in Contao 5!!
          * @deprecated contains deprecated code
          */
-        $GLOBALS['TL_HOOKS']['checkCredentials'][] = [ContaoBackendLogin::class, 'hookCheckCredentials'];
-		self::$loginGranted = true;
+        //$GLOBALS['TL_HOOKS']['checkCredentials'][] = [ContaoBackendLogin::class, 'hookCheckCredentials'];
+		//self::$loginGranted = true;
 
 		$user = $this->contaoUserProvider->loadUserByUsername($remoteUser->getUsername());
 
@@ -99,6 +99,6 @@ class ContaoBackendLogin
 	 */
 	public function hookCheckCredentials()
 	{
-		return self::$loginGranted;
+		//return self::$loginGranted;
 	}
 }
