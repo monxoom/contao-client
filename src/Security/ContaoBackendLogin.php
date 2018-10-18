@@ -5,6 +5,7 @@ namespace Comolo\SuperLoginClient\ContaoEdition\Security;
 use Comolo\SuperLoginClient\ContaoEdition\User\RemoteUserInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Contao\CoreBundle\Security\User\ContaoUserProvider;
 use Contao\CoreBundle\Framework\ContaoFrameworkInterface;
@@ -22,6 +23,7 @@ class ContaoBackendLogin
 	protected $tokenStorage;
 	protected $authenticationManager;
 	protected $eventDispatcher;
+	protected $requestStack;
 
     /**
      * ContaoBackendLogin constructor.
@@ -31,7 +33,7 @@ class ContaoBackendLogin
      * @param TokenStorageInterface $tokenStorage
      * @param AuthenticationManagerInterface $authenticationManager
      * @param EventDispatcherInterface $eventDispatcher
-     * @param Request $request
+     * @param RequestStack $requestStack
      */
 	public function __construct(
 	    ContaoUserProvider $contaoUserProvider,
@@ -40,7 +42,7 @@ class ContaoBackendLogin
         TokenStorageInterface $tokenStorage,
         AuthenticationManagerInterface $authenticationManager,
         EventDispatcherInterface $eventDispatcher,
-        Request $request
+        RequestStack $requestStack
 
     ) {
         $this->contaoUserProvider = $contaoUserProvider;
@@ -48,7 +50,7 @@ class ContaoBackendLogin
         $this->tokenStorage = $tokenStorage;
         $this->authenticationManager = $authenticationManager;
         $this->eventDispatcher = $eventDispatcher;
-        $this->request = $request;
+        $this->requestStack = $requestStack;
 
         if (!$contaoFramework->isInitialized()) $contaoFramework->initialize();
     }
@@ -79,7 +81,7 @@ class ContaoBackendLogin
 
 
         // Fire the login event manually
-        $event = new InteractiveLoginEvent($this->request, $token);
+        $event = new InteractiveLoginEvent($this->requestStack->getCurrentRequest(), $token);
         $this->eventDispatcher->dispatch('security.interactive_login', $event);
 
 
