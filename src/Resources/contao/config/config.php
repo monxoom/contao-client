@@ -16,9 +16,12 @@ if (TL_MODE == 'BE') {
 }
 
 $GLOBALS['TL_HOOKS']['parseBackendTemplate'][] = [
-    \Comolo\SuperLoginClient\ContaoEdition\Module\DisplayAuthProviders::class, 'addServersToLoginPage'
+    \Comolo\SuperLoginClient\ContaoEdition\BackendModule\DisplayAuthProviders::class, 'addServersToLoginPage'
 ];
 
 $GLOBALS['BE_MOD']['superlogin']['superlogin_auth_servers'] = [
     'tables'       => ['tl_superlogin_server'],
 ];
+
+
+$GLOBALS['TL_MODELS']['tl_superlogin_server'] = \Comolo\SuperLoginClient\ContaoEdition\Model\SuperLoginServerModel::class;

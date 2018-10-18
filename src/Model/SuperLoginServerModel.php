@@ -13,8 +13,6 @@
 
 namespace Comolo\SuperLoginClient\ContaoEdition\Model;
 
-use  Comolo\SuperLoginClient\ContaoEdition\AuthProvider\OAuth2Provider;
-
 class SuperLoginServerModel extends \Model
 {
 	protected static $strTable = 'tl_superlogin_server';
@@ -22,11 +20,12 @@ class SuperLoginServerModel extends \Model
     public function getRedirectUrl()
     {
         return \System::getContainer()->get('router')
-                ->generate('superlogin_auth_redirect', array('serverId' => $this->id));
+                ->generate('superlogin_auth_redirect', ['serverId' => $this->id]);
     }
 }
 
 /*
  * Fix autoload bug
  */
-class_alias('Comolo\SuperLoginClient\ContaoEdition\Model\SuperLoginServerModel', '\SuperLoginServerModel');
+# TODO: remove
+#class_alias('Comolo\SuperLoginClient\ContaoEdition\Model\SuperLoginServerModel', '\SuperLoginServerModel');
