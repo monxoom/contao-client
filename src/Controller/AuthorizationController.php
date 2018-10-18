@@ -82,7 +82,7 @@ class AuthorizationController extends Controller
 
         } catch (IdentityProviderException $e) {
             // Failed to get the access token or user details.
-            throw new AccessDeniedHttpException('An error occured');
+            throw new AccessDeniedHttpException('Invalid user credentials.');
         }
     }
 }
