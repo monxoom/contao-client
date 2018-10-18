@@ -2,7 +2,7 @@
 namespace Comolo\SuperLoginClient\ContaoEdition\Foundation\Server;
 
 use Comolo\SuperLoginClient\ContaoEdition\Model\SuperLoginServerModel;
-use Doctrine\DBAL\Connection as DatabaseConnection;
+use Doctrine\DBAL\Driver\Connection;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use League\OAuth2\Client\Provider\GenericProvider as OAuth2GenericProvider;
 use Symfony\Component\Routing\RouterInterface;
@@ -12,7 +12,7 @@ class ServerManager
     protected $connection;
     protected $router;
 
-    public function __construct(DatabaseConnection $connection, RouterInterface $router)
+    public function __construct(Connection $connection, RouterInterface $router)
     {
         $this->connection = $connection;
         $this->router = $router;
