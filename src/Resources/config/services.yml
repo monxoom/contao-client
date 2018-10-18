@@ -20,3 +20,4 @@ services:
     Comolo\SuperLoginClient\ContaoEdition\Controller\AuthorizationController:
         public: true
         autowire: true
+        tags: ['controller.service_arguments']
