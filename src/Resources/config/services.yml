@@ -17,3 +17,5 @@ services:
     Comolo\SuperLoginClient\ContaoEdition\Foundation\Security\ContaoBackendLogin:
         public: true # TODO
         autowire: true
+        arguments:
+            $contaoUserProvider: '@contao.security.backend_user_provider'
