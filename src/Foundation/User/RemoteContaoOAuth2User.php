@@ -1,8 +1,6 @@
 <?php
 namespace Comolo\SuperLoginClient\ContaoEdition\Foundation\User;
 
-use Comolo\SuperLoginClient\ContaoEdition\Foundation\User\RemoteUserInterface;
-
 class RemoteContaoOAuth2User implements RemoteUserInterface
 {
     protected $userData;

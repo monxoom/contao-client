@@ -1,6 +1,7 @@
 <?php
 namespace Comolo\SuperLoginClient\ContaoEdition\Foundation\Server;
 
+use Comolo\SuperLoginClient\ContaoEdition\Model\SuperLoginServerModel;
 use Doctrine\DBAL\Connection as DatabaseConnection;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -17,7 +18,7 @@ class ServerManager
         $this->router = $router;
     }
 
-    public function find($id)
+    public function find(int $id)
     {
         $stmt = $this->connection->prepare('SELECT * FROM tl_superlogin_server WHERE id = :id LIMIT 1');
         $stmt->bindValue('id', $id);
@@ -31,14 +32,23 @@ class ServerManager
         return null;
     }
 
-    public function generateReturnUrl($id)
+    public function generateReturnUrl(int $id)
     {
-		return $this->router->generate('superlogin_auth', ['serverId' => $id], UrlGeneratorInterface::ABSOLUTE_URL);
+		return $this->router->generate(
+		    'superlogin_auth',
+            ['serverId' => $id],
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );
     }
 
-    public function createOAuth2Provider($server)
+    /**
+     * TODO: model instead of object
+     * @param object $server
+     * @return OAuth2GenericProvider
+     */
+    public function createOAuth2Provider(object $server)
     {
-        $provider = new OAuth2GenericProvider([
+        return new OAuth2GenericProvider([
             'clientId'                => $server->public_id,
             'clientSecret'            => $server->secret,
             'redirectUri'             => $this->generateReturnUrl($server->id),
@@ -46,7 +56,5 @@ class ServerManager
             'urlAccessToken'          => $server->url_access_token,
             'urlResourceOwnerDetails' => $server->url_resource_owner_details,
         ]);
-
-        return $provider;
     }
 }
