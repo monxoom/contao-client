@@ -5,8 +5,3 @@ superlogin_auth:
 superlogin_auth_redirect:
     path:      /contao/superlogin/redirect/{serverId}
     defaults:  { _controller: ComoloSuperLoginClientBundle:Authorization:redirect }
-
-# TODO: remove
-superlogin_auth_debug:
-    path:      /debug
-    defaults:  { _controller: ComoloSuperLoginClientBundle:Authorization:debug }

@@ -61,16 +61,12 @@ class ContaoBackendLogin
     {
 		$user = $this->contaoUserProvider->loadUserByUsername($remoteUser->getUsername());
 
-		// \Contao\BackendUser::loadUserByUsername($username)
-
-
 		$token = new UsernamePasswordToken($user,null, self::SECURED_AREA, $user->getRoles());
         $this->tokenStorage->setToken($token);
 
         $this->session->set('_security_'.self::SECURED_AREA, serialize($token));
         $this->session->save();
 
-        // Fire the login event
         $event = new InteractiveLoginEvent($this->requestStack->getCurrentRequest(), $token);
         $this->eventDispatcher->dispatch('security.interactive_login', $event);
     }

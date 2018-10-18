@@ -14,16 +14,6 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class AuthorizationController extends Controller
 {
-    public function debugAction(SessionInterface $session)
-    {
-        $token = $session->get('_security_contao_backend');
-        dump(unserialize($token));
-
-
-        dump($session->get('debug_username'));
-
-    }
-
     /**
      * Redirect the user to the oauth server
      * @param int $serverId
