@@ -3,9 +3,9 @@ namespace Comolo\SuperLoginClient\ContaoEdition\Foundation\User;
 
 use Comolo\SuperLoginClient\ContaoEdition\Exception\UserNotYetCreatedException;
 use Doctrine\DBAL\Connection as DatabaseConnection;
-use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Comolo\SuperLoginClient\ContaoEdition\Exception\InvalidUserDetailsException;
 use Comolo\SuperLoginClient\ContaoEdition\Foundation\Security\ContaoBackendLogin;
+use Symfony\Component\Routing\RouterInterface;
 
 class RemoteUserManager
 {
@@ -16,7 +16,7 @@ class RemoteUserManager
     
     public function __construct(
         DatabaseConnection $connection,
-        Router $router,
+        RouterInterface $router,
         ContaoBackendLogin $contaoBackendLogin,
         RemoteContaoOAuth2User $remoteContaoOAuth2User
     ) {
