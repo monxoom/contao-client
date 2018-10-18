@@ -8,12 +8,22 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use League\OAuth2\Client\Provider\GenericProvider as OAuth2GenericProvider;
 use Symfony\Component\Routing\RouterInterface;
 
+/**
+ * Class ServerManager
+ * @package Comolo\SuperLoginClient\ContaoEdition\Server
+ */
 class ServerManager
 {
     protected $connection;
     protected $router;
     protected $contaoFramework;
 
+    /**
+     * ServerManager constructor.
+     * @param Connection $connection
+     * @param RouterInterface $router
+     * @param ContaoFrameworkInterface $contaoFramework
+     */
     public function __construct(
         Connection $connection,
         RouterInterface $router,
@@ -24,27 +34,23 @@ class ServerManager
         $this->contaoFramework = $contaoFramework;
     }
 
+    /**
+     * Find Login-Server
+     * @param int $serverId
+     * @return mixed
+     */
     public function find(int $serverId)
     {
         if (!$this->contaoFramework->isInitialized()) $this->contaoFramework->initialize();
 
         return SuperLoginServerModel::findById($serverId);
-        // TODO
-
-        /*
-        $stmt = $this->connection->prepare('SELECT * FROM tl_superlogin_server WHERE id = :id LIMIT 1');
-        $stmt->bindValue('id', $serverId);
-        $stmt->execute();
-        $result = $stmt->fetchAll();
-
-        if (count($result) === 1) {
-            return (object) $result[0];
-        }
-
-        return null;
-        */
     }
 
+    /**
+     * Generate return url
+     * @param int $id
+     * @return string
+     */
     public function generateReturnUrl(int $id)
     {
 		return $this->router->generate(
@@ -55,11 +61,11 @@ class ServerManager
     }
 
     /**
-     * TODO: model instead of object
-     * @param object $server
+     * Create OAuth2 Provider
+     * @param SuperLoginServerModel $server
      * @return OAuth2GenericProvider
      */
-    public function createOAuth2Provider($server)
+    public function createOAuth2Provider(SuperLoginServerModel $server)
     {
         return new OAuth2GenericProvider([
             'clientId'                => $server->public_id,

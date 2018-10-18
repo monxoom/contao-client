@@ -16,8 +16,7 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 class ContaoBackendLogin
 {
-	protected static $loginGranted = false;
-
+    protected const SECURED_AREA = 'contao_backend';
 	protected $contaoUserProvider;
 	protected $session;
 	protected $tokenStorage;
@@ -60,45 +59,18 @@ class ContaoBackendLogin
      */
     public function login(RemoteUserInterface $remoteUser)
     {
-        /**
-         * Will be deprecated in Contao 5!!
-         * @deprecated contains deprecated code
-         */
-        //$GLOBALS['TL_HOOKS']['checkCredentials'][] = [ContaoBackendLogin::class, 'hookCheckCredentials'];
-		//self::$loginGranted = true;
-
 		$user = $this->contaoUserProvider->loadUserByUsername($remoteUser->getUsername());
 
-		$firewallContext = 'contao_backend';
+        $this->session->set('debug_username', $user->username); // TODO
 
-		$token = new UsernamePasswordToken($user->username,null, $firewallContext, $user->getRoles());
-
-		//$authToken = $this->authenticationManager->authenticate($token);
+		$token = new UsernamePasswordToken($user->username,null, self::SECURED_AREA, $user->getRoles());
         $this->tokenStorage->setToken($token);
 
-        $this->session->set('_security_'.$firewallContext, serialize($token));
+        $this->session->set('_security_'.self::SECURED_AREA, serialize($token));
         $this->session->save();
 
-
-        // Fire the login event manually
+        // Fire the login event
         $event = new InteractiveLoginEvent($this->requestStack->getCurrentRequest(), $token);
         $this->eventDispatcher->dispatch('security.interactive_login', $event);
-
-
-        /*
-         * maybe only works in secured route area
-        $request = $this->container->get('request_stack')->getCurrentRequest();
-        $event = new InteractiveLoginEvent($request, $token);
-        $this->container->get('event_dispatcher')->dispatch('security.interactive_login', $event);
-        */
     }
-	
-	/**
-	 * Overwrite contao password mechanism
-     * @deprecated in Contao 5
-	 */
-	public function hookCheckCredentials()
-	{
-		//return self::$loginGranted;
-	}
 }
