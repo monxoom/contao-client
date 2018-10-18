@@ -16,3 +16,7 @@ services:
     Comolo\SuperLoginClient\ContaoEdition\Foundation\User\RemoteContaoOAuth2User:
         public: true
         autowire: true
+
+    Comolo\SuperLoginClient\ContaoEdition\Controller\AuthorizationController:
+        public: true
+        autowire: true
