@@ -70,6 +70,7 @@ class ContaoBackendLogin
         $this->tokenStorage->setToken($authToken);
 		
 		/*
+		 * maybe only works in secured route area
         $request = $this->container->get('request_stack')->getCurrentRequest();
         $event = new InteractiveLoginEvent($request, $token);
         $this->container->get('event_dispatcher')->dispatch('security.interactive_login', $event);

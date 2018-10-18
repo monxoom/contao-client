@@ -12,6 +12,7 @@ services:
         autowire: true
         arguments:
             $contaoUserProvider: '@contao.security.backend_user_provider'
+            $authenticationManager: '@security.authentication.manager'
 
     Comolo\SuperLoginClient\ContaoEdition\User\RemoteContaoOAuth2User:
         public: true
