@@ -2,6 +2,7 @@
 namespace Comolo\SuperLoginClient\ContaoEdition\Server;
 
 use Comolo\SuperLoginClient\ContaoEdition\Model\SuperLoginServerModel;
+use Contao\CoreBundle\Framework\ContaoFrameworkInterface;
 use Doctrine\DBAL\Driver\Connection;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use League\OAuth2\Client\Provider\GenericProvider as OAuth2GenericProvider;
@@ -11,15 +12,22 @@ class ServerManager
 {
     protected $connection;
     protected $router;
+    protected $contaoFramework;
 
-    public function __construct(Connection $connection, RouterInterface $router)
-    {
+    public function __construct(
+        Connection $connection,
+        RouterInterface $router,
+        ContaoFrameworkInterface $contaoFramework
+    ) {
         $this->connection = $connection;
         $this->router = $router;
+        $this->contaoFramework = $contaoFramework;
     }
 
     public function find(int $id)
     {
+        if (!$this->contaoFramework->isInitialized()) $this->contaoFramework->initialize();
+
         $stmt = $this->connection->prepare('SELECT * FROM tl_superlogin_server WHERE id = :id LIMIT 1');
         $stmt->bindValue('id', $id);
         $stmt->execute();
