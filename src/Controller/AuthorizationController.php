@@ -10,8 +10,9 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class AuthorizationController
+class AuthorizationController extends AbstractController
 {
     /**
      * Redirect the user to the oauth server
