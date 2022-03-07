@@ -1,7 +1,7 @@
 superlogin_auth:
     path:      /contao/superlogin/auth/{serverId}
-    defaults:  { _controller: ComoloSuperLoginClientBundle:Authorization:authorization }
+    controller: Comolo\SuperLoginClient\ContaoEdition\Controller\AuthorizationController::authorization
 
 superlogin_auth_redirect:
     path:      /contao/superlogin/redirect/{serverId}
-    defaults:  { _controller: ComoloSuperLoginClientBundle:Authorization:redirect }
+    controller: Comolo\SuperLoginClient\ContaoEdition\Controller\AuthorizationController::redirect

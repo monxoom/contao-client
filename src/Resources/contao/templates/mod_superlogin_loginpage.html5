@@ -8,6 +8,6 @@
 	</div>
 
 	<div class="superlogin-powered-by">
-	    powered by <a href="https://www.superlogin.net">SuperLogin</a>
+	    powered by <a href="https://www.comolo.de">Comolo</a>
 	</div>
 <?php endif; ?>
