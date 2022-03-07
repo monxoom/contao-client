@@ -6,13 +6,12 @@ use Comolo\SuperLoginClient\ContaoEdition\Server\ServerManager;
 use Comolo\SuperLoginClient\ContaoEdition\User\RemoteUserManager;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use League\OAuth2\Client\Provider\GenericProvider as OAuth2GenericProvider;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
-class AuthorizationController extends Controller
+class AuthorizationController
 {
     /**
      * Redirect the user to the oauth server
