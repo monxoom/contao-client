@@ -3,7 +3,7 @@ namespace Comolo\SuperLoginClient\ContaoEdition\Server;
 
 use Comolo\SuperLoginClient\ContaoEdition\Model\SuperLoginServerModel;
 use Contao\CoreBundle\Framework\ContaoFrameworkInterface;
-use Doctrine\DBAL\Driver\Connection;
+use Doctrine\DBAL\Connection;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use League\OAuth2\Client\Provider\GenericProvider as OAuth2GenericProvider;
 use Symfony\Component\Routing\RouterInterface;
