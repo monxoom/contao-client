@@ -43,7 +43,9 @@ class RemoteUserManager
             throw new InvalidUserDetailsException();
         }
 
-        $userId = $this->connection->fetchColumn('SELECT id FROM tl_user WHERE username = ?', [$user->getUsername()]);
+        $resultSet = $this->connection->executeQuery('SELECT id FROM tl_user WHERE username = ?', [$user->getUsername()]);
+        $resultUser = $resultSet->fetchAssociative();
+        $userId = $resultUser[0];
 
         if (!$userId) {
             // Create User

@@ -6,13 +6,20 @@ SuperLogin adds a OAuth2 login functionality to the contao backend.
 ### 1. Install with composer
 
 ```bash
-# For Contao 4.5 and above
 composer require superlogin/contao-client
 ```
 
+#### Recommended version
+
+| Contao Version | SuperLogin Version |
+|----------------|--------------------|
+| 4.13           | 3.6                |
+| 4.9            | 3.5                |
+
+
 ```bash
-#For Contao 4.4 and below
-composer require superlogin/contao-client '3.2.5'
+#To install a specific version
+composer require superlogin/contao-client '3.6.0'
 ```
 
 ### 2. Run the InstallTool
