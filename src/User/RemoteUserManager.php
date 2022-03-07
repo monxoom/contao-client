@@ -43,21 +43,15 @@ class RemoteUserManager
             throw new InvalidUserDetailsException();
         }
 
-        $resultSet = $this->connection->executeQuery('SELECT id FROM tl_user WHERE username = ?', [$user->getUsername()]);
-        $resultUser = $resultSet->fetchAssociative();
-        $userId = $resultUser[0];
+        $userId = $this->connection->fetchOne('SELECT id FROM tl_user WHERE username = ?', [ $user->getUsername() ]);
 
-        if (!$userId) {
-            // Create User
-            $this->connection->insert('tl_user', $user->toArray());
-            $userId = $this->connection->lastInsertId();
-        }
-        else {
-            // Update User
+        if ($userId) {
             $this->connection->update('tl_user', $user->toArray(), ['id' => $userId]);
+            $user->setId($userId);
+        } else {
+            $this->connection->insert('tl_user', $user->toArray());
+            $user->setId($this->connection->lastInsertId());
         }
-
-        $user->setId($userId);
     }
     
     public function loginAs(RemoteUserInterface $user)
