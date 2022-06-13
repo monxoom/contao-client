@@ -1,5 +1,4 @@
-<?php if (count($this->loginServers)>0): ?>
-	<!-- list -->
+<?php if ($this->loginServers && count($this->loginServers) > 0): ?>
 	<div class="superlogin-login-box">
 	    <?php if ($this->loginServers):?>
 	    <?php foreach($this->loginServers as $k => $server): ?>
