@@ -10,8 +10,8 @@
         "role": "Developer"
     }],
     "require": {
-	    "league/oauth2-client": "~1.1",
-        "contao/core-bundle": ">=4.5,<5.0"
+	"league/oauth2-client": "~1.1",
+        "contao/core-bundle": "~4.6"
     },
     "require-dev": {
         "contao/manager-plugin": "^2.0"
@@ -20,6 +20,9 @@
         "psr-4": {
             "Comolo\\SuperLoginClient\\ContaoEdition\\": "src/"
         }
+    },
+    "conflict": {
+        "contao/manager-plugin": "<2.0 || >=3.0"
     },
     "extra": {
         "contao-manager-plugin": "Comolo\\SuperLoginClient\\ContaoEdition\\ContaoManager\\Plugin"
