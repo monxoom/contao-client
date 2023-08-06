@@ -3,11 +3,10 @@
     "description":"SuperLogin Client for Contao 4",
     "keywords":["contao","login"],
     "type":"contao-module",
-    "homepage":"http://www.comolo.de",
+    "homepage":"https://github.com/superlogin/contao-client",
     "license":"proprietary",
     "authors":[{
-        "name": "Hendrik Obermayer, Comolo GmbH",
-        "homepage": "https://github.com/superlogin/contao-client",
+        "name": "Hendrik Obermayer",
         "role": "Developer"
     }],
     "require": {
