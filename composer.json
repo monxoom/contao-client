@@ -7,7 +7,7 @@
     "license":"proprietary",
     "authors":[{
         "name": "Hendrik Obermayer, Comolo GmbH",
-        "homepage": "http://www.superlogin.net",
+        "homepage": "https://github.com/superlogin/contao-client",
         "role": "Developer"
     }],
     "require": {
