@@ -10,7 +10,7 @@
         "role": "Developer"
     }],
     "require": {
-        "php": "^7.4",
+        "php": "^8.1",
         "league/oauth2-client": "^2.7",
         "contao/core-bundle": "^5.3",
         "symfony/config": "^5.4",
