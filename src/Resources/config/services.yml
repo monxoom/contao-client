@@ -6,7 +6,10 @@ services:
 
     Comolo\SuperLoginClient\ContaoEdition\:
         resource: '../*'
-        exclude: '../Resources/{config,services}'
+        exclude: 
+            - '../Resources/{config,services}'
+            - '../Resources/contao/**'
+            - '../Resources/config/**'
 
     Comolo\SuperLoginClient\ContaoEdition\Server\ServerManager:
         public: true
