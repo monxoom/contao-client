@@ -2,6 +2,8 @@ services:
     Comolo\SuperLoginClient\ContaoEdition\Server\ServerManager:
         public: true
         autowire: true
+        arguments:
+            $contaoFramework: '@contao.framework'
 
     Comolo\SuperLoginClient\ContaoEdition\User\RemoteUserManager:
         public: true
@@ -14,6 +16,7 @@ services:
             $contaoUserProvider: '@contao.security.backend_user_provider'
             $tokenStorage: '@security.token_storage'
             $authenticationUtils: '@security.authentication_utils'
+            $contaoFramework: '@contao.framework'
 
     Comolo\SuperLoginClient\ContaoEdition\User\RemoteContaoOAuth2User:
         public: true
