@@ -17,6 +17,9 @@ services:
             $tokenStorage: '@security.token_storage'
             $authenticationUtils: '@security.authentication_utils'
             $contaoFramework: '@contao.framework'
+            $session: '@session'
+            $eventDispatcher: '@event_dispatcher'
+            $requestStack: '@request_stack'
 
     Comolo\SuperLoginClient\ContaoEdition\User\RemoteContaoOAuth2User:
         public: true
