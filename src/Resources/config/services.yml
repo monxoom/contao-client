@@ -17,7 +17,7 @@ services:
             $tokenStorage: '@security.token_storage'
             $authenticationUtils: '@security.authentication_utils'
             $contaoFramework: '@contao.framework'
-            $session: '@session'
+            $session: '@contao.session.contao_backend'
             $eventDispatcher: '@event_dispatcher'
             $requestStack: '@request_stack'
 
