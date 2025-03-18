@@ -11,9 +11,14 @@
  * @copyright 2014-2018 Hendrik Obermayer
  */
 
-if (TL_MODE == 'BE') {
-	$GLOBALS['TL_CSS'][] = Environment::get('path').'/bundles/comolosuperloginclient/css/backend.css';
+$container = $GLOBALS['kernel']?->getContainer();
+$request = $container?->get('request_stack')?->getCurrentRequest();
+$isBackend = $request?->get('_scope') === 'backend';
+
+if ($container && $request && $isBackend) {
+    $GLOBALS['TL_CSS'][] = Environment::get('path').'/bundles/comolosuperloginclient/css/backend.css';
 }
+
 
 $GLOBALS['TL_HOOKS']['parseBackendTemplate'][] = [
     \Comolo\SuperLoginClient\ContaoEdition\BackendModule\DisplayAuthProviders::class, 'addServersToLoginPage'
