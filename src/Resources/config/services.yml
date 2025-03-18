@@ -31,4 +31,3 @@ services:
         tags:
             - { name: controller.service_arguments }
             - { name: container.service_subscriber }
-            - { name: kernel.event_subscriber }
