@@ -1,17 +1,23 @@
 services:
+    _defaults:
+        autowire: true
+        public: false
+        autoconfigure: true
+
+    Comolo\SuperLoginClient\ContaoEdition\:
+        resource: '../*'
+        exclude: '../Resources/{config,services}'
+
     Comolo\SuperLoginClient\ContaoEdition\Server\ServerManager:
         public: true
-        autowire: true
         arguments:
             $contaoFramework: '@contao.framework'
 
     Comolo\SuperLoginClient\ContaoEdition\User\RemoteUserManager:
         public: true
-        autowire: true
 
     Comolo\SuperLoginClient\ContaoEdition\Security\ContaoBackendLogin:
         public: true
-        autowire: true
         arguments:
             $contaoUserProvider: '@contao.security.backend_user_provider'
             $tokenStorage: '@security.token_storage'
@@ -23,9 +29,10 @@ services:
 
     Comolo\SuperLoginClient\ContaoEdition\User\RemoteContaoOAuth2User:
         public: true
-        autowire: true
 
     Comolo\SuperLoginClient\ContaoEdition\Controller\AuthorizationController:
         public: true
-        autowire: true
-        tags: ['controller.service_arguments']
+        tags:
+            - { name: controller.service_arguments }
+            - { name: container.service_subscriber }
+            - { name: kernel.event_subscriber }
