@@ -11,6 +11,7 @@ use Contao\CoreBundle\Framework\ContaoFrameworkInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class ContaoBackendLogin
 {
@@ -20,6 +21,7 @@ class ContaoBackendLogin
     protected $tokenStorage;
     protected $eventDispatcher;
     protected $requestStack;
+    protected $authenticationUtils;
 
     /**
      * ContaoBackendLogin constructor.
@@ -29,6 +31,7 @@ class ContaoBackendLogin
      * @param TokenStorageInterface $tokenStorage
      * @param EventDispatcherInterface $eventDispatcher
      * @param RequestStack $requestStack
+     * @param AuthenticationUtils $authenticationUtils
      */
     public function __construct(
         ContaoUserProvider $contaoUserProvider,
@@ -36,13 +39,15 @@ class ContaoBackendLogin
         ContaoFrameworkInterface $contaoFramework,
         TokenStorageInterface $tokenStorage,
         EventDispatcherInterface $eventDispatcher,
-        RequestStack $requestStack
+        RequestStack $requestStack,
+        AuthenticationUtils $authenticationUtils
     ) {
         $this->contaoUserProvider = $contaoUserProvider;
         $this->session = $session;
         $this->tokenStorage = $tokenStorage;
         $this->eventDispatcher = $eventDispatcher;
         $this->requestStack = $requestStack;
+        $this->authenticationUtils = $authenticationUtils;
 
         if (!$contaoFramework->isInitialized()) {
             $contaoFramework->initialize();

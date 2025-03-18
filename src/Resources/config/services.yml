@@ -13,6 +13,7 @@ services:
         arguments:
             $contaoUserProvider: '@contao.security.backend_user_provider'
             $tokenStorage: '@security.token_storage'
+            $authenticationUtils: '@security.authentication_utils'
 
     Comolo\SuperLoginClient\ContaoEdition\User\RemoteContaoOAuth2User:
         public: true
