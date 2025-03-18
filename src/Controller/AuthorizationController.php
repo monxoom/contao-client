@@ -8,46 +8,52 @@ use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use League\OAuth2\Client\Provider\GenericProvider as OAuth2GenericProvider;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Attribute\AsRoute;
 
 class AuthorizationController extends AbstractController
 {
+    public function __construct(
+        private readonly ServerManager $serverManager,
+        private readonly RemoteUserManager $remoteUserManager,
+    ) {
+    }
+
     /**
      * Redirect the user to the oauth server
      * @param int $serverId
-     * @param ServerManager $serverManager
      * @param SessionInterface $session
      * @return RedirectResponse
      */
-    public function redirectAction(int $serverId, ServerManager $serverManager, SessionInterface $session)
-    {
-        $server = $serverManager->find($serverId);
+    public function redirect(
+        int $serverId, 
+        SessionInterface $session
+    ): RedirectResponse {
+        $server = $this->serverManager->find($serverId);
 
         if (!$server) {
             throw new AccessDeniedHttpException('Unknown server');
         }
 
-        $provider = $serverManager->createOAuth2Provider($server);
+        $provider = $this->serverManager->createOAuth2Provider($server);
         $authorizationUrl = $provider->getAuthorizationUrl();
 
         // Store state in session
         $session->set('oauth2state', $provider->getState());
 
         // Redirect user
-        return new RedirectResponse($authorizationUrl, 302);
-
+        return new RedirectResponse($authorizationUrl);
     }
 
-    public function authorizationAction(
-        $serverId,
+    public function authorization(
+        int $serverId,
         Request $request,
         SessionInterface $session,
-        ServerManager $serverManager,
-        RemoteUserManager $remoteUserManager
-    ) {
-        $server = $serverManager->find($serverId);
+    ): Response {
+        $server = $this->serverManager->find($serverId);
         $state = $request->query->get('state');
         $state_session = $session->get('oauth2state');
 
@@ -56,7 +62,7 @@ class AuthorizationController extends AbstractController
             throw new AccessDeniedHttpException('Unknown server');
         }
 
-        $provider = $serverManager->createOAuth2Provider($server);
+        $provider = $this->serverManager->createOAuth2Provider($server);
 
         // Validate state
         if (empty($state) || ($state !== $state_session)) {
@@ -74,9 +80,9 @@ class AuthorizationController extends AbstractController
             $userDetails = $resourceOwner->toArray()['user'];
 
             // Simulate Contao login
-            $contaoUser = $remoteUserManager->create($userDetails);
-            $remoteUserManager->createOrUpdate($contaoUser);
-            $remoteUserManager->loginAs($contaoUser);
+            $contaoUser = $this->remoteUserManager->create($userDetails);
+            $this->remoteUserManager->createOrUpdate($contaoUser);
+            $this->remoteUserManager->loginAs($contaoUser);
 
             return $this->redirectToRoute('contao_backend');
 

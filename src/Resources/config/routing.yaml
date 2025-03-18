@@ -1,0 +1,15 @@
+superlogin_auth:
+    path: /contao/superlogin/auth/{serverId}
+    controller: Comolo\SuperLoginClient\ContaoEdition\Controller\AuthorizationController::authorization
+    defaults:
+        _scope: backend
+    requirements:
+        serverId: \d+
+
+superlogin_auth_redirect:
+    path: /contao/superlogin/redirect/{serverId}
+    controller: Comolo\SuperLoginClient\ContaoEdition\Controller\AuthorizationController::redirect
+    defaults:
+        _scope: backend
+    requirements:
+        serverId: \d+ 
