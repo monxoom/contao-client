@@ -28,7 +28,7 @@ class AuthorizationController extends AbstractController
      * @param SessionInterface $session
      * @return RedirectResponse
      */
-    public function redirect(
+    public function redirectToOAuth(
         int $serverId, 
         SessionInterface $session
     ): RedirectResponse {

@@ -8,8 +8,8 @@ superlogin_auth:
 
 superlogin_auth_redirect:
     path: /contao/superlogin/redirect/{serverId}
-    controller: Comolo\SuperLoginClient\ContaoEdition\Controller\AuthorizationController::redirect
+    controller: Comolo\SuperLoginClient\ContaoEdition\Controller\AuthorizationController::redirectToOAuth
     defaults:
         _scope: backend
     requirements:
-        serverId: \d+ 
+        serverId: \d+
